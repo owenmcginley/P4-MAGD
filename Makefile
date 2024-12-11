@@ -9,7 +9,7 @@ all: csv2json dropdb loaddb allqueries
 csv2json:
 	@echo Procesando csv para crear json
 	@echo -- puede modificarse para introducir datos a csv2json por linea de comandos -- 
-	@./csv2json.py 
+	@python3 ./csv2json.py 
 loaddb:
 	@echo Poblando BBDD a partir de ficheros json
 	@./db_load_files.sh

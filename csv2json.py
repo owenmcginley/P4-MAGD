@@ -39,11 +39,7 @@ import ast
 # if output_dir == '':
 #     output_dir = 'json'
 
-input_dir = 'csv'
-output_dir = 'json'
-
-
-def converter(csv_file):
+def converter(csv_file, input_dir, output_dir):
     with open(f"{input_dir}/{csv_file}", mode='r', encoding='utf-8') as f:
         reader = csv.DictReader(f)
         data = [row for row in reader]
@@ -59,7 +55,28 @@ def converter(csv_file):
     with open(f"{output_dir}/{json_file}", mode='w', encoding='utf-8') as f:
         json.dump(data, f, indent=4)
 
-files = ['listings_gz_small.csv', 'reviews_gz_small.csv', 'calendar_small.csv']
-for file in files:
-    converter(file)
-    print(f'{file} convertido a json')
+
+def main():
+    # Verifica que se han pasado suficientes argumentos
+    if len(sys.argv) > 3:
+        print("Usage: python booking.py <city> <room_tyepe> <start_date> <end_date>")
+        sys.exit(1)
+    
+    if len(sys.argv) == 1:
+        input_dir = 'csv'
+        output_dir = 'json'
+    else:
+    
+        input_dir = sys.argv[1]
+        output_dir = sys.argv[2] 
+
+    files = ['listings_gz_small.csv', 'reviews_gz_small.csv', 'calendar_small.csv']
+    for file in files:
+        converter(file,input_dir,output_dir)
+        print(f'{file} convertido a json')
+
+
+
+if __name__ == "__main__":
+    main()
+
