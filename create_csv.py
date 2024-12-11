@@ -15,15 +15,15 @@ listings_gz = pd.DataFrame()
 
 for city in cities:
     temp_calendar = pd.read_csv(f'{dir_data}{city}/calendar.csv', parse_dates=['date'], low_memory=False)
-    temp_calendar['city'] = cities.index(city) + 3
+    temp_calendar['city'] = city
     calendar = pd.concat([temp_calendar, calendar])
 
     temp_reviews_gz = pd.read_csv(f'{dir_data}{city}/reviews_gz.csv')
-    temp_reviews_gz['city'] = cities.index(city) + 3
+    temp_reviews_gz['city'] = city
     reviews_gz = pd.concat([temp_reviews_gz, reviews_gz])
 
     temp_listings_gz = pd.read_csv(f'{dir_data}{city}/listings_gz.csv')
-    temp_listings_gz['city'] = cities.index(city) + 3
+    temp_listings_gz['city'] = city
     listings_gz = pd.concat([temp_listings_gz, listings_gz])
 
 

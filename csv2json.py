@@ -48,6 +48,7 @@ def converter(input_dir, output_dir):
     
     listing_df["amenities"] = listing_df["amenities"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
     listing_df["host_verifications"] = listing_df["host_verifications"].apply(lambda x: ast.literal_eval(x) if isinstance(x, str) else x)
+    listing_df["price"] = listing_df["price"].str.replace('$', '').str.replace(',', '').astype(float)
     
     listing_df["host"] = listing_df.apply(lambda row: { 
         "id": row["host_id"],
